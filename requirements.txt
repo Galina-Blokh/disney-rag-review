@@ -1,0 +1,13 @@
+pandas==2.2.2
+# Pin NumPy to 1.x to avoid FAISS binary incompatibilities; works with Python 3.10
+numpy==1.26.4
+vaderSentiment==3.3.2
+openai==1.40.0
+httpx==0.27.2
+httpcore==1.0.5
+python-dotenv==1.0.1
+# Optional: enable FAISS backend; if install fails, the code falls back to NumPy retrieval
+faiss-cpu
+matplotlib==3.10.6
+pyarrow==21.0.0
+scipy>=1.8.0
