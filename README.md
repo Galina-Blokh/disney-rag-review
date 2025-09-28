@@ -132,16 +132,18 @@ print(res["answer"])
 
 ```mermaid
 flowchart LR
-    A[Raw ZIP: disney-reviews.zip] -->|load| B[src/data_loader.py]
-    B -->|clean/tokenize/date parse| C[Processed DataFrame]
-    C -->|OpenAI embeddings| D[Embedding Matrix]
-    D -->|FAISS/NumPy| E[Index]
-    F[Question + Filters] -->|parse| G[parse_question_filters()]
-    G --> H[retrieve()] -->|contexts| I[answer_question()]
+    A[disney-reviews.zip]
+    A --> B[src/data_loader.py]
+    B --> C[Processed DataFrame]
+    C --> D[Embeddings (OpenAI)]
+    D --> E[Index (FAISS/NumPy)]
+    F[Question]
+    F --> G[parse_question_filters]
+    G --> H[retrieve]
     E --> H
     C --> H
-    H --> I
-    I --> J[Markdown: Filters / Stats / Insights / Recommendations / Caveats]
+    H --> I[answer_question]
+    I --> J[Markdown output]
 ```
 
 - **`src/data_loader.py`**: Reads the ZIP, standardizes columns, cleans text, tokenizes, parses dates, and encodes categoricals.
