@@ -23,6 +23,28 @@ Actionable insights and recommendations from Disney park reviews using Retrieval
 - `requirements.txt` — pinned dependencies (NumPy 1.x for FAISS compatibility).
 - `.gitignore` — excludes `.env`, processed datasets, FAISS artifacts, and other large binaries.
 
+## Project structure
+
+```text
+2llm-home-assignment/
+├── notebooks/
+│   └── disney_reviews_preprocessing.ipynb
+├── src/
+│   ├── __init__.py
+│   ├── data_loader.py
+│   ├── rag_qa.py
+│   ├── sentiment_analyzer.py
+│   └── insights.py
+├── data/                # ignored: raw/processed datasets (see .gitignore)
+│   └── processed/       # generated locally if you save outputs
+├── artifacts_faiss/     # ignored: persisted vector index (optional)
+├── docs/                # optional docs (docx ignored)
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── .env                 # ignored: holds OPENAI_API_KEY
+```
+
 ## Prerequisites
 
 - Python 3.10 (recommended)
@@ -130,21 +152,7 @@ print(res["answer"])
 
 ## Architecture Overview
 
-```mermaid
-flowchart LR
-    A[disney-reviews.zip]
-    A --> B[src/data_loader.py]
-    B --> C[Processed DataFrame]
-    C --> D[Embeddings (OpenAI)]
-    D --> E[Index (FAISS/NumPy)]
-    F[Question]
-    F --> G[parse_question_filters]
-    G --> H[retrieve]
-    E --> H
-    C --> H
-    H --> I[answer_question]
-    I --> J[Markdown output]
-```
+
 
 - **`src/data_loader.py`**: Reads the ZIP, standardizes columns, cleans text, tokenizes, parses dates, and encodes categoricals.
 - **`src/rag_qa.py`**: Orchestrates embeddings, index build (FAISS preferred, NumPy fallback), retrieval with filters, and Markdown answer generation.
